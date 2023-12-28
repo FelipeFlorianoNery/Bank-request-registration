@@ -1,0 +1,146 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <string.h>
+
+struct Atendimento{
+	char nome[100];
+	char cpf[15];
+	int tipoAtendimento;
+};
+struct Atendimento atendimentos[999];
+		int cont = 0;
+		
+void listarAtendimentos(){	
+	int i;	
+	for(i=0 ; i<cont ; i++){
+		printf("Nome: %s\nCPF: %s\nTipo atendimento - %d - ", atendimentos[i].nome, atendimentos[i].cpf, atendimentos[i].tipoAtendimento);
+			
+			switch (atendimentos[i].tipoAtendimento) {
+            case 1:
+                printf("Abertura de Conta\n");
+                break;
+            case 2:
+                printf("Caixa\n");
+                break;
+            case 3:
+                printf("Gerente Pessoa Física\n");
+                break;
+            case 4:
+                printf("Gerente Pessoa Jurídica\n");
+                break;
+        }
+      printf("=======================================\n");
+  	  }
+  	  system("pause");
+  	  system("cls");
+	}		
+	
+void listarAtendimentoPorTipo(){  
+	int tipo, i;   
+    printf("=======================================\n");
+    printf("Digite uma das opções de atendimento:\n");
+    printf("1 - Abertura de Conta\n");
+    printf("2 - Caixa\n");
+    printf("3 - Gerente Pessoa Física\n");
+    printf("4 - Gerente Pessoa Jurídica\n");
+    scanf("%d", &tipo);    
+	system("cls");
+	
+	for (i = 0; i < cont; i++) {
+    if (atendimentos[i].tipoAtendimento == tipo) {
+        printf("Nome: %s\nCPF: %s\nTipo Atendimento - %d - ", atendimentos[i].nome, atendimentos[i].cpf, atendimentos[i].tipoAtendimento);
+
+    switch (tipo) {
+        case 1:
+            printf("Abertura de Conta\n");
+            break;
+        case 2:
+            printf("Caixa\n");
+            break;
+        case 3:
+            printf("Gerente Pessoa Física\n");
+            break;
+        case 4:
+            printf("Gerente Pessoa Jurídica\n");
+            break;
+    		}
+			printf("=======================================\n");  
+		}
+	}
+		 system("pause");
+		 system("cls");
+}
+
+void cadastrarCliente(){
+		printf("=======================================\n");
+		printf("Opção 1 - Solicitar atendimento\n");
+		printf("\nDigite o seu nome:\n");
+		fflush(stdin);
+		gets(atendimentos[cont].nome);
+		printf("\nDigite seu CPF:\n");
+		fflush(stdin);
+		gets(atendimentos[cont].cpf);
+		printf("\nEscolha o tipo de atendimento:\n");
+   		printf("1 - Abertura de Conta\n");
+   		printf("2 - Caixa\n");
+   		printf("3 - Gerente Pessoa Física\n");
+   		printf("4 - Gerente Pessoa Jurídica\n");
+   		scanf("%d", &atendimentos[cont].tipoAtendimento);
+		system("cls");
+		cont = cont + 1;
+	}
+	
+void menuOpcao(){
+	printf("=======================================\n");
+	printf("Bem-vindo ao sistema de atendimento\n");
+	printf("\n1 - Solicitar Atendimento\n");
+	printf("2 - Listar Atendimentos Registrados\n");
+	printf("3 - Listar Atendimento por Setor\n");
+	printf("4 - Sair\n");
+}
+
+int lerOpcao(){
+	menuOpcao();
+	int op;
+	scanf("%d", &op);
+	return op;
+}
+
+int main(){	
+	setlocale(LC_ALL,"");	
+	int opcao;	
+	
+	do{
+		opcao = lerOpcao();	
+		
+			switch(opcao){
+				case 1 : {
+					system("cls");
+					cadastrarCliente();
+					break;
+				}
+				case 2 : {
+					system("cls");
+					listarAtendimentos();
+					break;
+				}
+				case 3 :{
+					system("cls");
+					listarAtendimentoPorTipo();
+					break;
+				}
+				case 4 : {
+					system("cls");
+					printf("Saindo...");
+					break;
+				}
+				default :{
+					system("cls");
+					printf("Opção inválida, digite uma das opções!\n");
+					break;
+				}
+			}
+	}while(opcao !=4);
+	return 0;
+}
